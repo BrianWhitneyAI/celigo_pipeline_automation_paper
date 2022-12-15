@@ -1,3 +1,0 @@
-[console_scripts]
-celigo_pipeline_cli = celigo_pipeline_automation_paper.bin.celigo_pipeline_automation_paper_cli:main
-celigo_pipeline_directory = celigo_pipeline_automation_paper.bin.run_dir_cli:main
