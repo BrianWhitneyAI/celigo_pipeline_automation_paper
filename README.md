@@ -6,7 +6,7 @@
 
 Contains tools for the celigo pipeline
 
-celigo_pipeline_automation_paper==3.0.0
+celigo_pipeline_automation_paper==1.0.0
 ---
 ## Features
 
@@ -32,47 +32,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for information related to developing the
 
     This will setup a virtual environment local to this project and install all of the
     project's dependencies into it. The virtual env will be located in `celigo_pipeline_automation_paper/venv`.
-
-2. `make test`, `make fmt`, `make lint`, `make type-check`, `make import-sort`
-
-    Quality assurance
-
-3. `pip install -e .[dev]`
-
-    This will install your package in editable mode with all the required development
-    dependencies.
-
-4. `make docs`
-
-    This will generate documentation using sphinx.
-
-5. `make publish` and `make publish-snapshot`
-
-    Running this command will start the process of publishing to PyPI
-
-6. `make bumpversion` - [release, major, minor, patch, dev]
-    
-    update verisoning with new releases.
-
-7. `make clean`
-
-    This will clean up various Python and build generated files so that you can ensure
-    that you are working in a clean workspace.
-
-
-
-#### Suggested Git Branch Strategy
-
-1. `main` is for the most up-to-date development, very rarely should you directly
-   commit to this branch. GitHub Actions will run on every push and on a CRON to this
-   branch but still recommended to commit to your development branches and make pull
-   requests to main. If you push a tagged commit with bumpversion, this will also release to PyPI.
-2. Your day-to-day work should exist on branches separate from `main`. Even if it is
-   just yourself working on the repository, make a PR from your working branch to `main`
-   so that you can ensure your commits don't break the development head. GitHub Actions
-   will run on every push to any branch or any pull request from any branch to any other
-   branch.
-3. It is recommended to use "Squash and Merge" commits when committing PR's. It makes
-   each set of changes to `main` atomic and as a side effect naturally encourages small
-   well defined PR's.
 

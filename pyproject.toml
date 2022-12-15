@@ -1,6 +1,6 @@
 [project]
 name = "celigo_pipeline_automation_paper"
-version = "3.0.0"  # Do not edit manually; managed by bumpversion
+version = "1.0.0"  # Do not edit manually; managed by bumpversion
 description = "Core algorithms for the Celigo Pipeline"
 authors = [
     {name = "AICS", email="!AICS_SW@alleninstitute.org"},
@@ -10,15 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9.2"
 
 dependencies = [
-    "aicsimageio ~= 4.9.2",
-    "aicsimageio[czi] ~= 4.4",
-    "aicsfiles ~=5.1.0",
-    "aics_pipeline_uploaders ~= 1.0.1",
     "Jinja2 ~= 3.1.2",
-    "lkaccess ~= 1.4.25",
-    "slackclient ~= 2.9.4",
-    "psycopg2-binary ~= 2.9.3",
-    "python-dotenv ~= 0.21.0",
 ]
 
 [project.optional-dependencies]

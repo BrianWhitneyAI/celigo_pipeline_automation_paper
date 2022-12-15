@@ -52,11 +52,6 @@ class CeligoSingleImage(CeligoImage):
         raw_image = Path(raw_image_path)
         log.info(f"Executing Celigo pipeline on {raw_image.name}.")
 
-        # Check if working directory exists
-        if not os.path.exists(working_dir):
-            raise FileNotFoundError(f"{working_dir} does not exist!")
-        log.debug(f"connection established with working directory: {working_dir}.")
-
         if os.path.getsize(raw_image_path) > 100000000:
             self.image_type = "6 Well"
             self.pipeline_table = SIX_WELL_PIPELINES
@@ -111,7 +106,7 @@ class CeligoSingleImage(CeligoImage):
             }
             jinja_env = Environment(
                 loader=PackageLoader(
-                    package_name="celigo_pipeline_core", package_path="templates"
+                    package_name="celigo_pipeline_automation_paper", package_path="templates"
                 )
             )
             script_body = jinja_env.get_template(
@@ -157,7 +152,7 @@ class CeligoSingleImage(CeligoImage):
         # Generates script_body from existing templates.
         jinja_env = Environment(
             loader=PackageLoader(
-                package_name="celigo_pipeline_core", package_path="templates"
+                package_name="celigo_pipeline_automation_paper", package_path="templates"
             )
         )
         script_body = jinja_env.get_template("resize_template.j2").render(script_config)
@@ -168,9 +163,7 @@ class CeligoSingleImage(CeligoImage):
 
         # Runs resize on slurm
         self.output = subprocess.call(
-            ["sh", f"{str(self.working_dir)}/resize.sh"],
-            check=True,
-            capture_output=True,
+            ["sh", f"{str(self.working_dir)}/resize.sh"]
         )
 
         # Sets path to resized image to image path for future use
@@ -199,7 +192,7 @@ class CeligoSingleImage(CeligoImage):
         # Generates script for SLURM submission from templates.
         jinja_env = Environment(
             loader=PackageLoader(
-                package_name="celigo_pipeline_core", package_path="templates"
+                package_name="celigo_pipeline_automation_paper", package_path="templates"
             )
         )
         script_body = jinja_env.get_template("ilastik_template.j2").render(
@@ -213,9 +206,7 @@ class CeligoSingleImage(CeligoImage):
             [
                 "sh",
                 f"{str(self.working_dir)}/ilastik.sh",
-            ],
-            check=True,
-            capture_output=True,
+            ]
         )
 
         # Creates filelist.txt
@@ -250,7 +241,7 @@ class CeligoSingleImage(CeligoImage):
         # Generates script for SLURM submission from templates.
         jinja_env = Environment(
             loader=PackageLoader(
-                package_name="celigo_pipeline_core", package_path="templates"
+                package_name="celigo_pipeline_automation_paper", package_path="templates"
             )
         )
         script_body = jinja_env.get_template("cellprofiler_template.j2").render(
@@ -264,9 +255,7 @@ class CeligoSingleImage(CeligoImage):
             [
                 "sh",
                 f"{str(self.working_dir)}/cellprofiler.sh",
-            ],
-            check=True,
-            capture_output=True,
+            ]
         )
 
         # Set output path
