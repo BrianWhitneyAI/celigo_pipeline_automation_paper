@@ -8,15 +8,11 @@ Contains tools for the celigo pipeline
 
 celigo_pipeline_automation_paper==1.0.0
 ---
-## Features
 
--   Store values and retain the prior value in memory
--   ... some other functionality
 
 ## Installation
 
-**Stable Release:** `pip install celigo_pipeline_automation_paper`<br>
-**Development Head:** `pip install git+https://github.com/BrianWhitneyAI/celigo_pipeline_automation_paper.git`
+
 
 ## Documentation
 
@@ -28,8 +24,28 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for information related to developing the
 
 ## The Commands You Need To Know
 
-1. `make install`
+## System Requirements
+     - Systems
+     - Tested on 
+
+## Installation Guide
+
+1. 
+
+2. Cellprofiler Setup 
+
+3. Ilastik Setup
+
+4. Template Configuration
+
+5. Package Installment
+
+     `make install`
 
     This will setup a virtual environment local to this project and install all of the
     project's dependencies into it. The virtual env will be located in `celigo_pipeline_automation_paper/venv`.
+
+
+## Demos 
+
 
