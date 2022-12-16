@@ -106,7 +106,8 @@ class CeligoSingleImage(CeligoImage):
             }
             jinja_env = Environment(
                 loader=PackageLoader(
-                    package_name="celigo_pipeline_automation_paper", package_path="templates"
+                    package_name="celigo_pipeline_automation_paper",
+                    package_path="templates",
                 )
             )
             script_body = jinja_env.get_template(
@@ -152,7 +153,8 @@ class CeligoSingleImage(CeligoImage):
         # Generates script_body from existing templates.
         jinja_env = Environment(
             loader=PackageLoader(
-                package_name="celigo_pipeline_automation_paper", package_path="templates"
+                package_name="celigo_pipeline_automation_paper",
+                package_path="templates",
             )
         )
         script_body = jinja_env.get_template("resize_template.j2").render(script_config)
@@ -162,9 +164,7 @@ class CeligoSingleImage(CeligoImage):
             rsh.write(script_body)
 
         # Runs resize on slurm
-        self.output = subprocess.call(
-            ["sh", f"{str(self.working_dir)}/resize.sh"]
-        )
+        self.output = subprocess.call(["sh", f"{str(self.working_dir)}/resize.sh"])
 
         # Sets path to resized image to image path for future use
         self.image_path = (
@@ -192,7 +192,8 @@ class CeligoSingleImage(CeligoImage):
         # Generates script for SLURM submission from templates.
         jinja_env = Environment(
             loader=PackageLoader(
-                package_name="celigo_pipeline_automation_paper", package_path="templates"
+                package_name="celigo_pipeline_automation_paper",
+                package_path="templates",
             )
         )
         script_body = jinja_env.get_template("ilastik_template.j2").render(
@@ -241,7 +242,8 @@ class CeligoSingleImage(CeligoImage):
         # Generates script for SLURM submission from templates.
         jinja_env = Environment(
             loader=PackageLoader(
-                package_name="celigo_pipeline_automation_paper", package_path="templates"
+                package_name="celigo_pipeline_automation_paper",
+                package_path="templates",
             )
         )
         script_body = jinja_env.get_template("cellprofiler_template.j2").render(
