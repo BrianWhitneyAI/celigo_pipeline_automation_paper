@@ -1,4 +1,5 @@
 import importlib.resources as pkg_resources
+import json
 import logging
 import os
 from pathlib import Path
@@ -13,15 +14,20 @@ from .celigo_image import CeligoImage
 
 log = logging.getLogger(__name__)
 
+f = open("./bin/resource_paths.json")
+USER_CELIGO_PATHS = json.load(f)
+
 SIX_WELL_PIPELINES = {
     "rescale_pipeline": "6_well_rescale_pipeline.cppipe",
     "cellprofiler_pipeline": "6_well_cellprofiler_pipeline.cppipe",
+    "ilp": USER_CELIGO_PATHS["6_well_ilp"],
 }
 
 NINETYSIX_WELL_PIPELINES = {
     "rescale_pipeline": "96_well_rescale_pipeline.cppipe",
     "classification_model": "colonymorphology.model",
     "cellprofiler_pipeline_template": "96_well_pipeline_tempalate.j2",
+    "ilp": USER_CELIGO_PATHS["96_well_ilp"],
 }
 
 
@@ -148,6 +154,10 @@ class CeligoSingleImage(CeligoImage):
             "filelist_path": str(self.resize_filelist_path),
             "output_path": str(self.working_dir),
             "pipeline_path": str(self.rescale_pipeline_path),
+            "resize_conda": USER_CELIGO_PATHS["cellprofiler_conda"],
+            "activate_cellprofiler": USER_CELIGO_PATHS[
+                "cellprofiler_conda_environment"
+            ],
         }
 
         # Generates script_body from existing templates.
@@ -187,6 +197,10 @@ class CeligoSingleImage(CeligoImage):
         script_config = {
             "image_path": f"'{str( self.image_path)}'",
             "output_path": f"'{str(self.image_path.with_suffix(''))}_probabilities.tiff'",
+            "ilastik_conda": USER_CELIGO_PATHS["ilastik_conda"],
+            "ilastik_conda_environment": USER_CELIGO_PATHS["ilastik_conda_environment"],
+            "run_ilastik": USER_CELIGO_PATHS["run_ilastik"],
+            "ilp": self.pipeline_table["ilp"],
         }
 
         # Generates script for SLURM submission from templates.
@@ -237,6 +251,10 @@ class CeligoSingleImage(CeligoImage):
             "filelist_path": str(self.filelist_path),
             "output_dir": str(self.working_dir / "cell_profiler_outputs"),
             "pipeline_path": str(self.cellprofiler_pipeline_path),
+            "cellprofiler_conda": USER_CELIGO_PATHS["cellprofiler_conda"],
+            "activate_cellprofiler": USER_CELIGO_PATHS[
+                "cellprofiler_conda_environment"
+            ],
         }
 
         # Generates script for SLURM submission from templates.

@@ -8,20 +8,13 @@ import typing
 
 from .celigo_single_image import CeligoSingleImage
 
-DEFAULT_WORKING_DIR = "/allen/aics/microscopy/brian_whitney/temp_output"
-
-CELIGO_SLURM_TIMEOUTS = {
-    "6 Well": 360,
-    "96 Well": 90,
-}
-
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 log = logging.getLogger(__name__)
 
 
 def run_all(
     raw_image_path: str,
-    working_dir: str = DEFAULT_WORKING_DIR,
+    working_dir: str = "",
 ):
     """
     Process Celigo Image from `raw_image_path`. Submits jobs for Image Downsampling,
@@ -37,7 +30,6 @@ def run_all(
 
     """
     # Construct Image
-
     image = CeligoSingleImage(raw_image_path, working_dir)
 
     downsample_output_file_path = image.downsample()
@@ -64,7 +56,7 @@ def job_complete_check(
 def run_all_dir(
     dir_path: str,
     chunk_size: int = 30,
-    working_dir: str = DEFAULT_WORKING_DIR,
+    working_dir: str = "",
 ):
     """
     Process Celigo Images from a directory (`dir_path`) and all sub directories in batches.
