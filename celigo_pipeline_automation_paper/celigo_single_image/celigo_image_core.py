@@ -14,8 +14,8 @@ from .celigo_image import CeligoImage
 
 log = logging.getLogger(__name__)
 
-f = open("./bin/resource_paths.json")
-USER_CELIGO_PATHS = json.load(f)
+with open(Path(__file__).parent / "../bin/resource_paths.json", "r") as f:
+    USER_CELIGO_PATHS = json.load(f)
 
 SIX_WELL_PIPELINES = {
     "rescale_pipeline": "6_well_rescale_pipeline.cppipe",
